@@ -48,7 +48,7 @@ class MainActivity : AppCompatActivity() {
                 toggleFlash(power, bg, !on, cameraManager, cameraId)
                 on = !on
             }
-            catch (e: CameraAccessException) {
+            catch (e: Exception) {
                 displayMessage(alert)
             }
         }
@@ -58,16 +58,16 @@ class MainActivity : AppCompatActivity() {
     private fun toggleFlash(btn: ImageButton, background: ConstraintLayout,
                             state: Boolean, cM: CameraManager, cI: String) {
         if(state) {
+            cM.setTorchMode(cI, true)
             btn.setImageResource(R.drawable.on)
             btn.setBackgroundColor(Color.YELLOW)
             background.setBackgroundColor(Color.YELLOW)
-            cM.setTorchMode(cI, true)
         }
         else {
+            cM.setTorchMode(cI, false)
             btn.setImageResource(R.drawable.off)
             btn.setBackgroundColor(Color.GRAY)
             background.setBackgroundColor(Color.GRAY)
-            cM.setTorchMode(cI, false)
         }
     }
 
